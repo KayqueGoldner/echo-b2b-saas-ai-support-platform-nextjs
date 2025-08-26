@@ -6,6 +6,8 @@ import { WidgetAuthScreen } from "@/modules/widget/ui/screens/widget-auth-screen
 import { screenAtom } from "@/modules/widget/atoms/widget-atoms";
 import { WidgetErrorScreen } from "@/modules/widget/ui/screens/widget-error-screen";
 import { WidgetLoadingScreen } from "@/modules/widget/ui/screens/widget-loading-screen";
+import { WidgetSelectionScreen } from "@/modules/widget/ui/screens/widget-selection-screen";
+import { WidgetChatScreen } from "@/modules/widget/ui/screens/widget-chat-screen";
 
 interface WidgetViewProps {
   organizationId: string | null;
@@ -20,8 +22,8 @@ export const WidgetView = ({ organizationId }: WidgetViewProps) => {
     auth: <WidgetAuthScreen />,
     voice: <p>TODO: voice screen</p>,
     inbox: <p>TODO: inbox screen</p>,
-    selection: <p>TODO: selection screen</p>,
-    chat: <p>TODO: chat screen</p>,
+    selection: <WidgetSelectionScreen />,
+    chat: <WidgetChatScreen />,
     contact: <p>TODO: contact screen</p>,
   };
 

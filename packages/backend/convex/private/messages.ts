@@ -1,10 +1,54 @@
 import { ConvexError, v } from "convex/values";
 import { paginationOptsValidator } from "convex/server";
 import { saveMessage } from "@convex-dev/agent";
+import { generateText } from "ai";
+import { google } from "@ai-sdk/google";
 
-import { mutation, query } from "../_generated/server";
+import { action, mutation, query } from "../_generated/server";
 import { components } from "../_generated/api";
 import { supportAgent } from "../system/ai/agents/supportAgent";
+
+export const enhanceResponse = action({
+  args: {
+    prompt: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (identity === null) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Not logged in",
+      });
+    }
+
+    const orgId = identity.orgId as string;
+
+    if (!orgId) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Not logged in",
+      });
+    }
+
+    const response = await generateText({
+      model: google("gemini-2.5-flash"),
+      messages: [
+        {
+          role: "system",
+          content:
+            "Enhance the operator's message to be more professional, clear, and helpful while maintaining their intent and key information. And return the enhanced message only.",
+        },
+        {
+          role: "user",
+          content: args.prompt,
+        },
+      ],
+    });
+
+    return response.text;
+  },
+});
 
 export const create = mutation({
   args: {

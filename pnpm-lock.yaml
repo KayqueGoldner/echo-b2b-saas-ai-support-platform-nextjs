@@ -119,12 +119,12 @@ importers:
       '@workspace/backend':
         specifier: workspace:*
         version: link:../../packages/backend
-      '@workspace/math':
-        specifier: workspace:*
-        version: link:../../packages/math
       '@workspace/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      bowser:
+        specifier: 2.12.0
+        version: 2.12.0
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -219,9 +219,6 @@ importers:
       '@workspace/backend':
         specifier: workspace:*
         version: link:../../packages/backend
-      '@workspace/math':
-        specifier: workspace:*
-        version: link:../../packages/math
       '@workspace/ui':
         specifier: workspace:*
         version: link:../../packages/ui

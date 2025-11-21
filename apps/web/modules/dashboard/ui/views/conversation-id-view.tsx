@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useThreadMessages, toUIMessages } from "@convex-dev/agent/react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { Doc, Id } from "@workspace/backend/_generated/dataModel";
 import { api } from "@workspace/backend/_generated/api";
@@ -97,6 +98,7 @@ export const ConversationIdView = ({
 
       form.setValue("message", response);
     } catch (error) {
+      toast.error("Error enhancing response. Please try again.");
       console.error(error);
     } finally {
       setIsEnhancing(false);
